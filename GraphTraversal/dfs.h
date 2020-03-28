@@ -1,13 +1,12 @@
 #ifndef DFS_HEADER
 #define DFS_HEADER
-#include "graph.h"
 
-#define QUEUE_SIZE 255
+#define STACK_SIZE 255
 
-typedef struct Queue {
+typedef struct Stack {
     char** items;
     int size;
-} Queue;
+} Stack;
 
 VisitList* dfs(Graph*, char*);
 

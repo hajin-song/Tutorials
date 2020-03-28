@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "dfs.h": "c",
+        "bfs.h": "c"
+    }
+}

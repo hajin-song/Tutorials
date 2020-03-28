@@ -1,22 +1,21 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "graph.h"
 #include "utility.h"
+#include "graph.h"
 #include "dfs.h"
 
-Queue* create_empty_queue();
-void enqueue(Queue*, char*);
-char* dequeue(Queue*);
+Stack* create_empty_stack();
+void add_to_stack(Stack*, char*);
+char* pop_from_stack(Stack*);
 
 VisitList* dfs(Graph* g, char* node_id) {
     VisitList* visit_list = malloc(sizeof(VisitList));
-    Queue* q = create_empty_queue();
+    Stack* s = create_empty_stack();
 
-    enqueue(q, node_id);
+    add_to_stack(s, node_id);
 
-    while(q->size > 0) {
-        char* visiting_node = dequeue(q);
+    while(s->size > 0) {
+        char* visiting_node = pop_from_stack(s);
 
         if(!is_visited(visit_list, visiting_node)) {
             mark_as_visited(visit_list, visiting_node);
@@ -26,11 +25,11 @@ VisitList* dfs(Graph* g, char* node_id) {
             while(neighbours->current != NULL) {
                 if(strcmp(neighbours->current->node_one_id, visiting_node) == 0) {
                     if(!is_visited(visit_list, neighbours->current->node_two_id)){
-                        enqueue(q, neighbours->current->node_two_id);
+                        add_to_stack(s, neighbours->current->node_two_id);
                     }
                 } else {
                     if(!is_visited(visit_list, neighbours->current->node_one_id)){
-                        enqueue(q, neighbours->current->node_one_id);
+                        add_to_stack(s, neighbours->current->node_one_id);
                     }
                 }
                 neighbours = neighbours->next;
@@ -41,26 +40,21 @@ VisitList* dfs(Graph* g, char* node_id) {
     return visit_list;
 }
 
-Queue* create_empty_queue(){
-    Queue* q = malloc(sizeof(Queue));
-    q->items = malloc(sizeof(char*) * QUEUE_SIZE);
-    q->size = 0;
+Stack* create_empty_stack(){
+    Stack* s = malloc(sizeof(Stack));
+    s->items = malloc(sizeof(char*) * STACK_SIZE);
+    s->size = 0;
 
-    return q;
+    return s;
 }
 
-void enqueue(Queue* q, char* node_id) {
-    q->items[q->size++] = node_id;
+void add_to_stack(Stack* s, char* node_id) {
+    s->items[s->size++] = node_id;
 }
 
-char* dequeue(Queue* q) {
-    char* item = q->items[0];
-
-    for(int i = 1  ; i < q->size ; i++) {
-        q->items[i-1] = q->items[i];
-    }
-
-    q->size -= 1;
+char* pop_from_stack(Stack* s) {
+    char* item = s->items[s->size-1];
+    s->items[--s->size] = NULL;
 
     return item;
 }
