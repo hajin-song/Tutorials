@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=-I
-DEPS = graph.h
-OBJ = main.o graph.o
+DEPS = graph.h utility.h dfs.h
+OBJ = main.o graph.o utility.o dfs.o
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)

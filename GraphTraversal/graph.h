@@ -28,10 +28,10 @@ typedef struct Graph {
 } Graph;
 
 Graph* create_empty_graph();
-Node* create_node(char* identifier);
-Edge* create_edge(char* node_one_id, char* node_two_id);
-void insert_node(Graph* g, Node* node);
-void insert_edge(Graph* g, Edge* edge);
-void print_graph(Graph* g);
-
+Node* create_node(char*);
+Edge* create_edge(char*, char*);
+void insert_node(Graph*, Node*);
+void insert_edge(Graph*, Edge*);
+void print_graph(Graph*);
+EdgeList* get_node_neighbours(Graph*, char*);
 #endif

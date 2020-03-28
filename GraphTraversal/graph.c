@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "graph.h"
 
 Graph* create_empty_graph() {
@@ -36,23 +37,16 @@ Edge* create_edge(char* node_one_id, char* node_two_id) {
 
 void insert_node(Graph* g, Node* node) {
     NodeList* last_node = g->nodes;
-
-    // printf("Inserting node, %s...\n", node->identifier);
-
+    
     if(last_node->current == NULL) {
         last_node->current = node;
 
         return;
     }
 
-    // printf("First node right now is %s...\n", last_node->current->identifier);
-
     while(last_node->next != NULL) {
         last_node = last_node->next;
     }
-
-    // printf("Last node right now is %s...\n", last_node->current->identifier);
-    // printf("What after next? %d...\n\n", last_node->next == NULL);
 
     last_node->next = malloc(sizeof(NodeList));
     last_node->next->current = node;
@@ -81,21 +75,31 @@ void print_graph(Graph* g) {
     NodeList* current_node = g->nodes;
     EdgeList* current_edge = g->edges;
 
-    printf("Printing Nodes in the Graph...\n");
-
     while(current_node != NULL && current_node->current != NULL) {
-        printf("\t%s\n", current_node->current->identifier);
 
         current_node = current_node->next;
     }
 
-    printf("Printing Edges in the Graph...\n");
+    while(current_edge != NULL && current_edge->current != NULL) {
+        current_edge = current_edge->next;
+    }
+}
+
+EdgeList* get_node_neighbours(Graph* g, char* node_id) {
+    EdgeList* neighbours = malloc(sizeof(EdgeList));
+    EdgeList* current_neighbours = neighbours;
+
+    EdgeList* current_edge = g->edges;
 
     while(current_edge != NULL && current_edge->current != NULL) {
-        printf("\tbetween %s and %s\n", current_edge->current->node_one_id, current_edge->current->node_two_id);
+        if (strcmp(current_edge->current->node_one_id, node_id) == 0|| strcmp(current_edge->current->node_two_id, node_id) == 0) {
+            current_neighbours->current = current_edge->current;
+            current_neighbours->next = malloc(sizeof(EdgeList));
+            current_neighbours = current_neighbours->next;
+        }
 
         current_edge = current_edge->next;
     }
 
-
+    return neighbours;
 }

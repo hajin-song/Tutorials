@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include "graph.h"
+#include "utility.h"
+#include "dfs.h"
 
 int main() {
-    printf("Hello World\n");
-    
     Graph* g = create_empty_graph();
 
     insert_node(g, create_node("Melbourne"));
@@ -18,6 +18,20 @@ int main() {
     insert_edge(g, create_edge("St. Kilda East", "Caulfield North"));
 
     print_graph(g);
+
+    VisitList* result = dfs(g, "Melbourne");
+
+    printf("Visited in the order of\n");
+
+    while(result->node_id != NULL) {
+        printf("\t%s\n", result->node_id);
+
+        result = result->next;
+
+        if(result == NULL) {
+            break;
+        }
+    }
 
     return(0);
 }
