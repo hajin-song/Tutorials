@@ -3,6 +3,8 @@
 #include <string.h>
 #include "graph.h"
 
+int node_exists(Graph*, char*);
+
 Graph* create_empty_graph() {
     Graph* g = malloc(sizeof(Graph));
 
@@ -54,6 +56,12 @@ void insert_node(Graph* g, Node* node) {
 }
 
 void insert_edge(Graph* g, Edge* edge) {
+    if(node_exists(g, edge->node_one_id) == 0 && node_exists(g, edge->node_two_id) == 0) {
+        printf("Nodes connected by edge does not exist in the graph.\n");
+
+        return;
+    }
+
     EdgeList* last_edge = g->edges;
 
     if(last_edge->current == NULL) {
@@ -76,7 +84,6 @@ void print_graph(Graph* g) {
     EdgeList* current_edge = g->edges;
 
     while(current_node != NULL && current_node->current != NULL) {
-
         current_node = current_node->next;
     }
 
@@ -102,4 +109,18 @@ EdgeList* get_node_neighbours(Graph* g, char* node_id) {
     }
 
     return neighbours;
+}
+
+int node_exists(Graph* g, char* node_id) {
+    NodeList* current_node = g->nodes;
+
+    while(current_node != NULL && current_node->current != NULL) {
+        if(strcmp(current_node->current->identifier, node_id) == 0) {
+            return 1;
+        }
+
+        current_node = current_node->next;
+    }
+
+    return 0;
 }

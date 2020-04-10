@@ -31,7 +31,7 @@ int main() {
 
     print_graph(g);
 
-    VisitList* result = dfs(g, "Melbourne");
+    VisitList* result = bfs(g, "Melbourne");
 
     printf("Visited in the order of\n");
 
