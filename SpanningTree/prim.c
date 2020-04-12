@@ -33,7 +33,6 @@ MinimumSpanningTree* prim(Graph* g, char* start_node_id) {
       int current_edge_cost = current_edge->weight;
       char* neighbour_node_id;
       current_node_edges = current_node_edges->next;
-      
       if(strcmp(current_edge->node_one_id, current_node->current) == 0) {
         neighbour_node_id = current_edge->node_two_id;
       } else {
@@ -98,22 +97,22 @@ char* pop(PriorityQueue* q) {
   QueueItem top_item = q->queue_item[1];
   q->item_count--;
 
-  int index = 1;
+  int current_index = 1;
 
-  while(index != q->item_count+1) {
-    int last_item_index = q->item_count + 1;
-    int child_index = index * 2;
+  while(current_index != q->item_count+1) {
+    int current_swap_index = q->item_count + 1;
+    int current_child_index = current_index * 2;
 
-    if(child_index <= q->item_count && q->queue_item[child_index].cost < q->queue_item[last_item_index].cost) {
-      last_item_index = child_index;
+    if(current_child_index <= q->item_count && q->queue_item[current_child_index].cost < q->queue_item[current_swap_index].cost) {
+      current_swap_index = current_child_index;
     }
 
-    if(child_index + 1 <= q->item_count && q->queue_item[child_index+1].cost < q->queue_item[last_item_index].cost) {
-      last_item_index = child_index + 1;
+    if(current_child_index + 1 <= q->item_count && q->queue_item[current_child_index+1].cost < q->queue_item[current_swap_index].cost) {
+      current_swap_index = current_child_index + 1;
     }
 
-    q->queue_item[index] = q->queue_item[last_item_index];
-    index = last_item_index;
+    q->queue_item[current_index] = q->queue_item[current_swap_index];
+    current_index = current_swap_index;
   }
 
   return top_item.node;
