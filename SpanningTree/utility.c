@@ -37,3 +37,11 @@ int is_visited(VisitList* visit_list, char* node_id) {
 
     return 0;
 }
+
+void free_visited_list(VisitList* visit_list) {
+    while(visit_list != NULL) {
+        VisitList* to_free = visit_list;
+        visit_list = visit_list->next;
+        free(to_free);
+    }
+}

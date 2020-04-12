@@ -55,7 +55,8 @@ MinimumSpanningTree* prim(Graph* g, char* start_node_id) {
 
   free(q->queue_item);
   free(q);
-  
+  free(visit_list);
+
   return mst;
 }
 
@@ -145,9 +146,9 @@ MinimumSpanningTree* initialise_tree(Graph* g, char* start_node_id) {
 void free_tree(MinimumSpanningTree* mst) {
   while(mst != NULL && mst->current != NULL) {
     MinimumSpanningTree* to_free = mst;
+    mst = mst->next;
     free(mst->current);
     free(mst);
-    mst = mst->next;
   }
 }
 

@@ -148,15 +148,15 @@ void free_graph(Graph* g) {
 
     while(current_node != NULL && current_node->current != NULL) {
         NodeList* to_free = current_node;
+        current_node = current_node->next;
         free(to_free->current);
         free(to_free);
-        current_node = current_node->next;
     }
 
     while(current_edge != NULL && current_edge->current != NULL) {
         EdgeList* to_free = current_edge;
+        current_edge = current_edge->next;
         free(to_free->current);
         free(to_free);
-        current_edge = current_edge->next;
     }
 }
