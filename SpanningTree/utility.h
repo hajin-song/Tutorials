@@ -10,5 +10,5 @@ typedef struct VisitList {
 
 void mark_as_visited(VisitList*, char*);
 int is_visited(VisitList*, char*);
-
+void free_visited_list(VisitList*);
 #endif

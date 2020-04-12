@@ -55,7 +55,7 @@ MinimumSpanningTree* prim(Graph* g, char* start_node_id) {
 
   free(q->queue_item);
   free(q);
-  free(visit_list);
+  free_visited_list(visit_list);
 
   return mst;
 }
