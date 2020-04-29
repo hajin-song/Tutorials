@@ -33,6 +33,7 @@ MinimumSpanningTree* prim(Graph* g, char* start_node_id) {
       int current_edge_cost = current_edge->weight;
       char* neighbour_node_id;
       current_node_edges = current_node_edges->next;
+      
       if(strcmp(current_edge->node_one_id, current_node->current) == 0) {
         neighbour_node_id = current_edge->node_two_id;
       } else {

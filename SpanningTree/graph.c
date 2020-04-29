@@ -8,8 +8,8 @@ int node_exists(Graph*, char*);
 Graph* create_empty_graph() {
     Graph* g = malloc(sizeof(Graph));
 
-    g->nodes = malloc(sizeof(NodeList));
-    g->edges = malloc(sizeof(EdgeList));
+    g->nodes = (NodeList*)malloc(sizeof(NodeList));
+    g->edges = (EdgeList*)malloc(sizeof(EdgeList));
 
     g->nodes->current = NULL;
     g->nodes->next = NULL;
