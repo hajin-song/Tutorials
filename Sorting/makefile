@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=-I
-DEPS = quickSort.h
-OBJ = main.o quickSort.o
+DEPS = quickSort.h mergeSort.h
+OBJ = main.o quickSort.o mergeSort.o
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)

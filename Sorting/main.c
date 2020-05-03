@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "quickSort.h"
+#include "mergeSort.h"
 
-#define LIST_SIZE 100
+#define LIST_SIZE 10
 
 void seed_random(int* list){
     int random_num, count;
@@ -18,15 +19,16 @@ int main() {
   int* list = (int*)malloc(LIST_SIZE * sizeof(int));
   seed_random(list);
 
-  for(int index = 0 ; index < LIST_SIZE ; index++) {
-    printf("%d, ", list[index]);
+  for(int i = 0 ; i < LIST_SIZE ; i++) {
+    printf("%d ", list[i]);
   }
 
-  quick_sort(list, 0, LIST_SIZE-1);
   printf("\n\n\n");
 
-  for(int index = 0 ; index < LIST_SIZE ; index++) {
-    printf("%d, ", list[index]);
+  merge_sort(list, 0, LIST_SIZE-1);
+
+  for(int i = 0 ; i < LIST_SIZE ; i++) {
+    printf("%d ", list[i]);
   }
 
   printf("\n");
