@@ -33,6 +33,8 @@ int main() {
 
   printf("\n");
 
+  printf("Debug purpose statement\n");
+
   free(list);
   return(0);
 }

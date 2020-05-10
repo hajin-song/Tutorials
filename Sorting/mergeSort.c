@@ -41,7 +41,7 @@ void merge(int* list, int start, int divide_index, int end) {
     merged_index++;
   }
 
-  while(right_index < right_count){
+  while(right_index < right_count) {
     list[merged_index] = right_list[right_index];
     right_index++;
     merged_index++;
