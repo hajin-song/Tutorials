@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=-I
-DEPS = bst.h
-OBJ = main.o bst.o
+DEPS = bst.h avl.h
+OBJ = main.o bst.o avl.o
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
