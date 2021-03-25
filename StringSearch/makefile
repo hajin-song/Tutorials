@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=-I
-DEPS = naiveSearch.h kmp.h
-OBJ = main.o naiveSearch.o kmp.o
+DEPS = bmh.h
+OBJ = main.o bmh.o
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
